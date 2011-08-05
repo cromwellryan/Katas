@@ -3,10 +3,14 @@
 namespace StringCalculatorKataInFSharp
 
 type StringCalculator() =
-  member calc.Add input = 
+
+  let safeparse input = 
     match input with 
-    | "" -> 0
-    | "0" -> 0
-    | "1" -> 1
-    | "2" -> 2
-    | _ -> raise (System.ArgumentException())
+      | "" -> 0
+      | input -> match System.Int32.TryParse(input) with 
+                  | (false, _) -> raise (new System.ArgumentException("Unable to parse"))
+                  | (true, value) -> value
+
+  member calc.Add (input : string) = 
+    input.Split(';') |> 
+    Array.map safeparse

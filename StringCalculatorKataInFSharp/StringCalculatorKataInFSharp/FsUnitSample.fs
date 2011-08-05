@@ -13,10 +13,14 @@ type ``Given a calculator``()=
     [<Test>] member test.
      ``when adding an empty input it returns 0`` ()=
             addAndAssert "" 0
-
+            
     [<Test>] member test.
       ``when adding a "0" input it returns 0`` ()=
          addAndAssert "0" 0
+         
+    [<Test>] member test.
+      ``when adding two 0's input it returns 0`` ()=
+         addAndAssert "0,0" 0
          
     [<Test>] member test.
      ``when adding a 1 alone it returns 1`` () =
